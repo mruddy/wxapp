@@ -14,7 +14,7 @@ Environment=WXSTATION_SOURCE_HOST=cam.surfstation.surf
 Environment=WXSTATION_SOURCE_PORT=22222
 Environment=WXAPP_OUTPUT_PATH=/tmp/wx.json
 StandardInput=null
-StandardOutput=null
+StandardOutput=journal
 StandardError=journal
 ExecStart=/opt/jdk-18/bin/java -jar wxapp-1.0-SNAPSHOT.jar
 ExecStop=/bin/kill -s TERM $MAINPID
