@@ -2,8 +2,8 @@ Davis Instruments 6357 Vantage Vue Wireless Integrated Sensor Suite (Part #: 063
 WeatherLinkIP™ Data Logger for Vantage Stations (Part #: 06555)
 https://www.davisinstruments.com/support/weather/download/VantageSerialProtocolDocs_v261.pdf
 
-Apache Maven 3.8.5
-OpenJDK 18 https://jdk.java.net/18/
+Apache Maven 3.8.7
+OpenJDK 19.0.1 https://jdk.java.net/19/
 
 mvn versions:display-plugin-updates
 mvn versions:display-dependency-updates
