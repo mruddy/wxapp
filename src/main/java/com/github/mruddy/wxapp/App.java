@@ -4,6 +4,8 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -31,7 +33,10 @@ public class App {
     scheduledExecutorService.scheduleWithFixedDelay(new WxClientTask(wxStationSource, messsageQueue), 0, 1, TimeUnit.SECONDS);
     while (true) {
       final String message = messsageQueue.take().toString();
-      Files.write(outputPath, message.getBytes(StandardCharsets.UTF_8));
+      final Path tempFile = Files.createTempFile(null, null, PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rw-r--r--")));
+      App.log.fine(String.format("temp = %s", tempFile));
+      Files.write(tempFile, message.getBytes(StandardCharsets.UTF_8));
+      Files.move(tempFile, outputPath, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
       App.log.fine(message);
     }
   }
